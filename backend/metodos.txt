@@ -1,0 +1,20 @@
+// 1. Vandermonde
+// 2. Newton
+// 3. Lagrange
+// 4. Spline -> lineal, cuadrático, cúbico
+
+vandermonde, newton, lagrange, spline lineal >= 2 entrenamiento
+spline cuadratico >= 3 entrenamiento
+spline cubico >= 4 entrenamiento
+
+* Entradas = {x, y, orden} hasta 10 datos
+* Salidas = polinomio escrito con su variable x y su dominio
+
+* Sistema de errores y ayudas:
+    - No dejar datos vacios
+    - No poner x repetidos
+
+* Graficar el polinomio en el dominio
+
+* Debe seleccionar el 10%, 20%, 30% de los datos para hacer
+  validacion, y calcular el error de interpolacion (vector = pvi - P(vi)) y sacar norma infinito
