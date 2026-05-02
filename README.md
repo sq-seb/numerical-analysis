@@ -2,6 +2,25 @@
 MADE BY: Andrés Restrepo, Juan Pablo Posso, Sebastián Villegas
 
 ---
+
+## Default behavior
+* By default, the frontend runs in port 8080 and the backend in 5000. You can override this behavior in
+
+    ```bash
+    frontend/vite.config.js
+    ```
+
+    and
+
+        backend/server.py
+
+    respectively. Just look for the "port" keyword.
+<br>
+* Make sure the backend port matches the one in `frontend/src/.env`
+
+
+---
+
 ## Setting up NuMethods
 
 ### Frontend
