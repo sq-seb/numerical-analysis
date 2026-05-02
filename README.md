@@ -21,15 +21,21 @@ Then, in frontend/, install all dependencies with:
 
 
 ### Backend
-Before running the backend, go to backend/ and run:
+Before running the backend, go to backend/ and create a venv. You can do this by running the following commands in your shell in order:
 
-On Windows:
+    python -m venv venv
 
-    venv\Scripts\activate
+And then,
+* On Windows:
+  
+```bash
+venv\Scripts\activate
+```
 
-On macOS/Linux:
-
-    source venv/bin/activate
+* On macOS/Linux:
+```bash
+source venv/bin/activate
+```
 
 This should activate a virtual environment where you can install all the required Python packages for this project. When you see (venv) in your shell, you can install all Python dependencies with:
 
