@@ -1,5 +1,50 @@
+# -----------------------------------------------------
+# ADDITIONAL PARSING FOR ONE_VARIABLE ROUTES
+import numpy as np
+import re
+
+FUNCTION_MAP = {
+    "sin": "np.sin",
+    "cos": "np.cos",
+    "tan": "np.tan",
+    "ln": "np.log",
+    "log10": "np.log10",
+}
+
+CONSTANT_MAP = {
+    "e": "np.e",
+    "pi": "np.pi",
+}
+
+def translate_expr(expr: str) -> str:
+    # IMPORTANT: exponent first
+    expr = expr.replace("^", "**")
+
+    # functions
+    for k, v in FUNCTION_MAP.items():
+        expr = re.sub(rf"\b{k}\b", v, expr)
+
+    # constants
+    for k, v in CONSTANT_MAP.items():
+        expr = re.sub(rf"\b{k}\b", v, expr)
+
+    return expr
+
+def eval_expr(expr: str, x_value: float):
+    expr = translate_expr(expr)
+
+    allowed_env = {
+        "np": np,
+        "x": x_value
+    }
+
+    return eval(expr, {"__builtins__": {}}, allowed_env)
+# -----------------------------------------------------
+import numpy as np
 from flask import *
 from flask_cors import CORS
+
+from src.one_variable.bisection import bisection
 
 from src.interpolation.vandermonde import vandermonde
 from src.interpolation.newton import newton
@@ -14,6 +59,41 @@ PORT = 5000
 
 server = Flask(__name__)
 CORS(server)
+
+# ==================================================================
+# ONE VARIABLE ROUTES
+@server.route('/bisection', methods=['POST'])
+def bisection_route():
+    data = request.get_json()
+
+    f_str = data.get("f")
+    a = float(data.get("a"))
+    b = float(data.get("b"))
+    niter = int(data.get("niter"))
+    value = float(data.get("value"))
+    tol_type = data.get("tol_type")
+
+    print("raw:", f_str)
+
+    # 1. Translate to numpy syntax
+    safe_expr = translate_expr(f_str)
+    print("translated:", safe_expr)
+
+    # 2. Build safe function f(x)
+    def f(x):
+        return eval_expr(f_str, x)
+
+    # 3. Run bisection
+    result = bisection(
+        f=f,
+        a=a,
+        b=b,
+        niter=niter,
+        value=value,
+        tol_type=tol_type
+    )
+    print(result)
+    return jsonify(result)
 
 # ==================================================================
 # INTERPOLATION ROUTES

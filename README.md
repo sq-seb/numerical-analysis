@@ -16,6 +16,7 @@ MADE BY: Andrés Restrepo, Juan Pablo Posso, Sebastián Villegas
 
     respectively. Just look for the "port" keyword.
 <br>
+
 * Make sure the backend port matches the one in `frontend/src/.env`
 
 
@@ -24,7 +25,7 @@ MADE BY: Andrés Restrepo, Juan Pablo Posso, Sebastián Villegas
 ## Setting up NuMethods
 
 ### Frontend
-Before running the frontend, update the API URL in frontend/.env with your (possibly private) IP address.
+Before running the frontend, update the API URL in `frontend/.env` with your (possibly private) IP address.
 
 For example, replace:
 
@@ -40,7 +41,7 @@ Then, in frontend/, install all dependencies with:
 
 
 ### Backend
-Before running the backend, go to backend/ and create a venv. You can do this by running the following commands in your shell in order:
+Before running the backend, go to `backend/` and create a venv. You can do this by running the following commands in your shell in order:
 
     python -m venv venv
 
@@ -63,11 +64,11 @@ This should activate a virtual environment where you can install all the require
 ---
 ## Running NuMethods
 ### Frontend
-After setting up the frontend, run inside frontend/ the following command:
+After setting up the frontend, run inside `frontend/` the following command:
 
     npm run dev
 
 ### Backend
-After setting up the backend, run (make sure the virtual environment is activated) inside backend/ the following command:
+After setting up the backend, run (make sure the virtual environment is activated) inside `backend/` the following command:
 
     python server.py

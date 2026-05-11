@@ -110,6 +110,27 @@ export default function Lagrange() {
       );
     }
 
+    // ---------------------------- fix -------------------------
+    const trainingXs = pairs
+      .slice(0, trainingSize)
+      .map((p) => Number(p.x));
+
+    const validationXs = pairs
+      .slice(trainingSize)
+      .map((p) => Number(p.x));
+
+    const minTrain = Math.min(...trainingXs);
+    const maxTrain = Math.max(...trainingXs);
+
+    const invalidBorder = validationXs.some(
+      (x) => x <= minTrain || x >= maxTrain
+    );
+
+    if (invalidBorder) {
+      return showError("Validation points cannot lie on dataset borders.");
+    }
+    // ----------------------------------------------------------
+
     lastSubmitValidRef.current = true;
     setError("");
 
